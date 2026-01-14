@@ -1,39 +1,40 @@
 # Semantic Contradiction Detector
 
-## Project Overview
+## Overview
 This project implements a **Semantic Contradiction Detector** as part of a technical assessment on *Deceptive Review Detection in the Wild*.  
-The goal is to automatically identify **self-contradicting statements within a single product review**, which is a common signal of deceptive or low-trust reviews.
 
-The system analyzes reviews at the sentence level using **semantic embeddings and logical heuristics** to determine whether contradictions exist.
-
----
-
-## Key Features
-- Sentence-level text preprocessing
-- Claim extraction from reviews
-- Semantic similarity using Sentence-BERT (SBERT)
-- Detection of polarity and negation conflicts
-- Confidence score generation (0–1)
-- Identification of contradicting sentence pairs
-- Evaluation using standard classification metrics
+The main goal is to detect **self-contradicting statements within a single product review**, which is a strong signal of low-quality or potentially deceptive reviews. Unlike traditional spam detection, this system focuses on **semantic meaning and logical consistency**, not just keywords.
 
 ---
 
-## Approach
+## What This System Does
+Given a single review, the system:
+- Breaks the text into individual sentences
+- Treats each sentence as a claim
+- Compares claims to check if they contradict each other
+- Returns:
+  - Whether a contradiction exists
+  - A confidence score (0–1)
+  - The sentence pairs that contradict
+  - A short explanation
+
+---
+
+## Approach Used
 This implementation follows **Option A** from the assignment:
 
 > **Sentence embeddings + semantic similarity with logical reasoning**
 
-### High-level steps:
-1. Split the review into sentences
-2. Encode each sentence using SBERT
-3. Compare sentence pairs for:
-   - High semantic similarity (same topic)
-   - Opposing sentiment or negation
-4. Flag contradictions and compute confidence
-5. Evaluate performance on a synthetic dataset
+### How it works (in simple terms):
+1. The review is split into sentences
+2. Each sentence is converted into a semantic vector using **Sentence-BERT (SBERT)**
+3. Sentence pairs are compared:
+   - If they talk about the same topic  
+   - But express opposite meanings (e.g., “fast” vs “slow”)
+4. Such pairs are flagged as contradictions
+5. A confidence score is calculated based on semantic similarity
 
-The approach does **not require model training**, making it suitable for low-data and fast-deployment scenarios.
+This approach works well **without requiring any model training**, which makes it practical for real-world deployment with limited labeled data.
 
 ---
 
@@ -47,7 +48,7 @@ The approach does **not require model training**, making it suitable for low-dat
 
 ---
 
-## Installation (Jupyter Environment)
+## Installation (Jupyter Notebook)
 
 Run the following command **inside a Jupyter cell**:
 
